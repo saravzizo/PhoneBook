@@ -13,3 +13,30 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+#slide-in-from-right {
+  position: relative;
+  right: 0%;
+  animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-in {
+  0% {
+      transform: translateX(50%);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+
+.toggle-checkbox:checked {
+  top: 0;
+  right: 0;
+  border-color:rgb(46, 112, 217);
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color:  rgb(46, 112, 217);
+}
