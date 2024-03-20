@@ -9,12 +9,21 @@ const Settings = ({ handleBack }) => {
         setIsToggled(!isToggled);
     }
 
+    const [isClosing, setIsClosing] = useState(false);
+
+    const handleClose = () => {
+        setIsClosing(true);
+        setTimeout(handleBack, 100); // delay to allow animation to finish
+    }
+
+
 
     return (
-        <div className="container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen " id='slide-in-from-right'>
+        
+        <div className={`container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen ${isClosing ? "slide-out-from-left" : "slide-in-from-right" }`}>
 
             <div className="flex items-center p-6 justify-center border-b border-gray-300 border-opacity-20 font-bold text-xl">
-                <i className="bi bi-chevron-left pr-3" onClick={handleBack}></i>
+                <i className="bi bi-chevron-left pr-3" onClick={handleClose}></i>
                 <p>Settings</p>
                 <span className='grow'></span>
             </div>
