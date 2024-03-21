@@ -1,7 +1,6 @@
 env/
 Design/
 
-
 # dependencies
 phonebook/node_modules
 
@@ -18,3 +17,7 @@ phonebook/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+book/book/__pycache__/
+book/Login/migrations/__pycache__/
+book/Login/__pycache__/
