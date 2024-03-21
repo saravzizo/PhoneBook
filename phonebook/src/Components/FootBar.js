@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 const FootBar = () => {
 
-    const [isClicked, setIsClicked] = useState([false, false, false]);
+    const [isClicked, setIsClicked] = useState([true, false, false]);
 
     const handleClick = (index) => {
         const newIsClicked = [false, false, false];

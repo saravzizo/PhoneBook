@@ -36,9 +36,18 @@ class contacts(APIView):
     def post(self,request):
         data = request.data
         user = request.user
-        contact_name = data.get('contact_name')
-        contact_number = data.get('contact_number')
-        Contact.objects.create(user = user, contact_name =contact_name ,contact_number= contact_number)
+        
+        if isinstance(data, list): 
+            for item in data:
+                contact_name = item.get('contact_name')
+                contact_number = item.get('contact_number')
+                Contact.objects.create(user=user, contact_name=contact_name, contact_number=contact_number)
+        else: 
+            contact_name = data.get('contact_name')
+            contact_number = data.get('contact_number')
+            Contact.objects.create(user=user, contact_name=contact_name, contact_number=contact_number)
+            
+        
         
         return Response(data, status=200)
     

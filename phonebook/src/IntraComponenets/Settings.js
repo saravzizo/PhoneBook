@@ -13,7 +13,7 @@ const Settings = ({ handleBack }) => {
 
     const handleClose = () => {
         setIsClosing(true);
-        setTimeout(handleBack, 100); // delay to allow animation to finish
+        setTimeout(handleBack, 100);
     }
 
 

@@ -18,6 +18,18 @@ const CreateContacts = ({ handlePlusBack }) => {
                 <p className="text-white font-semibold text-xl">Save</p>
             </div>
 
+                <div className="flex px-6 mb-6 pt-8 items-end justify-evenly">
+                    <label className="px-4">Name</label>
+                    <input type="text" className="bg-black border-b border-gray-500 outline-0"></input>
+                </div>
+
+                <div className="flex px-6 mb-6 pt-8 items-end justify-evenly">
+                    <label className="px-4">Number</label>
+                    <input type="number" className="bg-black border-b border-gray-500 outline-0"></input>
+                </div>
+
+
+
 
         </div>
     )
