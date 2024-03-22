@@ -12,3 +12,9 @@ phonebook/node_modules
 book/book/__pycache__/
 book/Login/migrations/__pycache__/
 book/Login/__pycache__/
+book/db.sqlite3
+
+book/*.log 
+book/*.pot 
+book/*.pyc 
+book/media
