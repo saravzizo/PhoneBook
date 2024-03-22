@@ -18,4 +18,4 @@ book/*.log
 book/*.pot 
 book/*.pyc 
 book/media
-book/Login/__pycache__/admin.cpython-310.pyc
+book/Login/migrations/__pycache__

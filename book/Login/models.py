@@ -20,5 +20,5 @@ class Fav_contacts(models.Model):
     fav_Contacts = models.ForeignKey(Contact, on_delete =models.CASCADE)
     
 class Feature_Flag(models.Model):
-    user = models.ForeignKey(user_model, on_delete =models.CASCADE, unique =True)
+    user = models.OneToOneField(user_model, on_delete =models.CASCADE, unique =True)
     Number_Feature_Flag = models.BooleanField()
