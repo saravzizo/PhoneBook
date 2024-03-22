@@ -11,13 +11,14 @@ import Api from "../ApiConfig"
 const Home = () => {
 
     const [res, setRes] = useState([]);
-    
+    const [user, setUser] = useState();
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`${Api}/contacts/`);
                 const data = await response.json();
                 setRes(data);
+                setUser(data[0].user)
     
             } catch (error) {
                 console.error("Error", error);
@@ -75,15 +76,15 @@ const Home = () => {
         }
     };
 
-    console.log(checkedContacts)
+
 
 
     return (
 
         <>
-            {showSettings ? <Settings handleBack={handleSettingsBack} />
+            {showSettings ? <Settings handleBack={handleSettingsBack} user = {user} />
 
-                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack} />
+                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack}  />
 
                     :
                         <div className="container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen " >
