@@ -17,12 +17,6 @@ class contactSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
-class contactNumSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = '__all__'
-        
-        
 class FavSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fav_contacts
