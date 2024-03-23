@@ -118,10 +118,9 @@ class contactDetail(APIView):
 
 class Favourites_view(APIView):
 
-    def get(self, request):
-        user = request.user
+    def get(self, request, user_pk):
 
-        res = Fav_contacts.objects.filter(user=user)
+        res = Fav_contacts.objects.filter(user=user_pk)
         list = []
 
         for item in res:
@@ -133,7 +132,10 @@ class Favourites_view(APIView):
 
         return Response(serializer.data)
 
-    def post(self, request):
+
+class Favourites_view_Post(APIView):
+
+    def post(self, request, user_pk):
         try:
             user = request.user
             contact_ids = request.data

@@ -27,7 +27,7 @@ const Deleted =()=>{
             <div className="px-6 mb-6  sticky overflow-y-scroll" style={{ maxHeight: "55vh", minHeight: "55vh", scrollbarWidth: "none" }} >
             {
                 
-                res.map((m,index) => 
+                [...res].sort((a, b) => a.contact_name.localeCompare(b.contact_name)).map((m,index) => 
                     
                 <div key={index} className="flex flex-col my-6">
                     <p className="text-md font-normal text-gray-200">{m.contact_name}</p>
