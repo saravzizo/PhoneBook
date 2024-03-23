@@ -6,25 +6,40 @@ import FootBar from "./FootBar";
 import Settings from "../IntraComponenets/Settings"
 import CreateContacts from "../IntraComponenets/CreateContact";
 import Api from "../ApiConfig"
+import Favourites from "../IntraComponenets/Favourites";
+import Deleted from "../IntraComponenets/Deleted";
 
 
 const Home = () => {
-
+    const [user, setUser ] = useState()
     const [res, setRes] = useState([]);
-    
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`${Api}/contacts/`);
                 const data = await response.json();
                 setRes(data);
+                setUser(data[0].user);
+                let user = (data[0].user)
+                
+                const res = await fetch(`${Api}/user/${user}/settings/`,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        method: "GET"
+                    });
+                const r = await res.json();
+                setIsToggled(r.Number_Feature_Flag)
     
             } catch (error) {
                 console.error("Error", error);
             }
         };
 
+       
         fetchData();
+        
     }, []);
 
 
@@ -75,15 +90,40 @@ const Home = () => {
         }
     };
 
-    console.log(checkedContacts)
 
+
+    const [isToggled, setIsToggled] = useState(true);
+
+    const handleNumberToggle = () => {
+        setIsToggled(!isToggled);
+    }
+
+
+
+    const [favClicked, setFavClicked] = useState(false);
+    const [binClicked, setBinClicked] = useState(false);
+
+    const handleFootBarClick =(index) =>{
+        if(index == 0){
+            setFavClicked(false);
+            setBinClicked(false);
+        }
+        else if(index ==1){
+            setFavClicked(true);
+        }
+        else{
+            setFavClicked(false)
+            setBinClicked(true);
+        }
+
+    }
 
     return (
 
         <>
-            {showSettings ? <Settings handleBack={handleSettingsBack} />
+            {showSettings ? <Settings handleBack={handleSettingsBack} user={user} isToggled = {isToggled} handleNumberToggle= {handleNumberToggle} />
 
-                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack} />
+                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack}  />
 
                     :
                         <div className="container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen " >
@@ -115,8 +155,11 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts}/>
-                            <FootBar  isEdit= {isEdit}/>
+                            {favClicked ? <Favourites user={user}/>
+                            
+                            :binClicked ? <Deleted />
+                            : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> }
+                            <FootBar  isEdit= {isEdit} handleFootBarClick={handleFootBarClick}/>
                         </div>
 
                        

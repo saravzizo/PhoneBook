@@ -1,5 +1,5 @@
 
-const ContactList = ({ isEdit, res, handleCheck, checkedContacts }) => {
+const ContactList = ({ isEdit, res, handleCheck, checkedContacts ,isToggled }) => {
 
     const OrderByLetter = "A"
 
@@ -22,13 +22,13 @@ const ContactList = ({ isEdit, res, handleCheck, checkedContacts }) => {
                                 
                                 <div className="">
                                     <p className="text-md font-normal text-gray-200">{m.contact_name}</p>
-                                    <p className="text-xs text-gray-400">+91 {m.contact_number}</p>
+                                    {isToggled && <p className="text-xs text-gray-400">+{m.country_code} {m.contact_number}</p>}
                                 </div>
                             </div>
 
                             : <div key={index} className="flex flex-col my-6">
                                 <p className="text-md font-normal text-gray-200">{m.contact_name}</p>
-                                <p className="text-xs text-gray-400">+91 {m.contact_number}</p>
+                                {isToggled && <p className="text-xs text-gray-400">+{m.country_code} {m.contact_number}</p>}
                             </div>
                     )
                     )
