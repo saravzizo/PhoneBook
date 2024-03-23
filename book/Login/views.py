@@ -14,7 +14,6 @@ from rest_framework.response import Response
 from .serializers import (
     UserSerializer,
     contactSerializer,
-    contactNumSerializer,
     FavSerializer,
     DeletedSerializer,
     FeatureSerializer,
@@ -89,7 +88,7 @@ class contactDetail(APIView):
     def get(self, request, contact_number):
         try:
             contact = Contact.objects.get(contact_number=contact_number)
-            serializer = contactNumSerializer(contact, many=False)
+            serializer = contactSerializer(contact, many=False)
             return Response(serializer.data, status=200)
 
         except Contact.DoesNotExist:
@@ -102,6 +101,7 @@ class contactDetail(APIView):
                 user=contact.user,
                 contact_name=contact.contact_name,
                 contact_number=contact_number,
+                country_code=contact.country_code,
             )
             contact.delete()
             return Response(
@@ -119,8 +119,18 @@ class contactDetail(APIView):
 class Favourites_view(APIView):
 
     def get(self, request):
-        res = Fav_contacts.objects.all()
-        serializer = FavSerializer(res, many=True)
+        user = request.user
+
+        res = Fav_contacts.objects.filter(user=user)
+        list = []
+
+        for item in res:
+            fav_contact_key = item.fav_Contacts.id
+            contact = get_object_or_404(Contact, id=fav_contact_key)
+            list.append(contact)
+
+        serializer = contactSerializer(list, many=True)
+
         return Response(serializer.data)
 
     def post(self, request):
