@@ -155,7 +155,7 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            {favClicked ? <Favourites/>
+                            {favClicked ? <Favourites user={user}/>
                             
                             :binClicked ? <Deleted />
                             : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> }
