@@ -596,6 +596,10 @@ video {
   position: sticky;
 }
 
+.m-6 {
+  margin: 1.5rem;
+}
+
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -609,6 +613,11 @@ video {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .mb-4 {
@@ -637,6 +646,10 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .block {

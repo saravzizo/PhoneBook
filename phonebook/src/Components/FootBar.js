@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-const FootBar = ({ isEdit }) => {
+const FootBar = ({ isEdit , handleFootBarClick}) => {
 
     const [isClicked, setIsClicked] = useState([true, false, false]);
 
@@ -8,6 +8,7 @@ const FootBar = ({ isEdit }) => {
         const newIsClicked = [false, false, false];
         newIsClicked[index] = true;
         setIsClicked(newIsClicked);
+        handleFootBarClick(index);
     };
 
 
@@ -45,12 +46,12 @@ const FootBar = ({ isEdit }) => {
                         </div>
                         <div className="flex flex-col items-center justify-center mx-5 cursor-pointer" onClick={() => handleClick(2)}>
                             {isClicked[2] ? <div className='text-blue-500 text-center'>
-                                <i className="bi bi-moon-stars-fill"></i>
-                                <p className="text-xs">Theme</p>
+                                <i className="bi bi-trash-fill"></i>
+                                <p className="text-xs">Deleted</p>
                             </div>
                                 : <div className='text-center'>
-                                    <i className="bi bi-moon-stars"></i>
-                                    <p className="text-xs">Theme</p>
+                                    <i className="bi bi-trash"></i>
+                                    <p className="text-xs">Deleted</p>
                                 </div>
                             }
                         </div>

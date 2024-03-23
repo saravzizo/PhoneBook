@@ -3,13 +3,9 @@ import Api from '../ApiConfig'
 import { useState } from 'react';
 
 
-const Settings = ({ handleBack, user }) => {
+const Settings = ({ handleBack, user,isToggled, handleNumberToggle }) => {
 
-    const [isToggled, setIsToggled] = useState(true);
-
-    const handleNumberToggle = () => {
-        setIsToggled(!isToggled);
-    }
+    
 
     const [isClosing, setIsClosing] = useState(false);
 
@@ -18,25 +14,7 @@ const Settings = ({ handleBack, user }) => {
         setTimeout(handleBack, 100);
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`${Api}/user/${user}/settings/`,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        method: "GET"
-                    });
-                const res = await response.json();
-                setIsToggled(res.Number_Feature_Flag)
-
-            } catch (error) {
-                console.error("Error", error);
-            }
-        };
-        fetchData();
-    }, []);
+    
 
 
     const handleApi = async () => {
