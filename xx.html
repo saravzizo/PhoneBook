@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form onsubmit="return check()">
+<input type="checkbox" id="id1" class="msgCheckbox" value="Whatsapp">
+<input type="checkbox" id="id2" class="msgCheckbox" value="Facebook"> Facebook
+<input type="checkbox" id="id3" class="msgCheckbox" value="Insta">Insta
+<input type="submit" id="" >
+<div id="div1"><div></form>
+<script>
+function check(){
+var values=document.getElementsByClassName("msgCheckbox");
+console.log(" dfb ");
+document.getElementById("div1").innerHTML="You have selected: <br/>";   
+
+//for(var i=0; i<values.length;i++){
+//if(values[i].checked) document.getElementById("div1").innerHTML += values[i].value+"<br/>";
+//}
+
+for(var i=0; i<values.length;i++){
+if(values[i].checked) document.getElementById("div1").innerHTML += values[i].value+"<br/>";
+}
+
+
+return false;
+}
+</script>
+</body>
+</html>

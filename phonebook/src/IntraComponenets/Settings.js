@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import Api from '../ApiConfig'
 import { useState } from 'react';
 
@@ -15,6 +14,20 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle }) => {
     }
 
     
+    const handleLogout = () => {
+        
+
+        try {
+            const response =  fetch(`${Api}/Logout/`);
+            localStorage.removeItem('isLoggedIn');
+            localStorage.clear();
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Error", error);
+        }
+
+    }
 
 
     const handleApi = async () => {
@@ -30,6 +43,7 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle }) => {
                 }),
             });
             const data = await response.json();
+            console.log(data);
 
         } catch (error) {
             console.error("Error", error);
@@ -54,6 +68,21 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle }) => {
                     <input type="checkbox" name="toggle" id="toggle" checked={isToggled} onChange={handleNumberToggle} onClick={handleApi} className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-gray-500 appearance-none cursor-pointer" />
                     <label htmlFor="toggle" className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-500 cursor-pointer"></label>
                 </div>
+                
+            </div>
+
+
+
+            <div className='mt-8 flex flex-col items-start px-6'>
+                <p className='my-5'>User Detail</p>
+                <p>UserName : {user}</p>
+            </div>
+
+            <div className='mt-96 flex items-center px-6'>
+                <p className='text-sm' onClick={handleLogout}>Logout</p>
+                <span className='grow'></span>
+               
+                
             </div>
 
         </div>

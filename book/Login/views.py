@@ -19,9 +19,43 @@ from .serializers import (
     FeatureSerializer,
     FeaturePatchSerializer,
 )
+from django.contrib.auth import authenticate, login, logout
+from rest_framework import status
 
 
 # Create your views here.
+
+
+class Login(APIView):
+    
+    def get(self, request):
+        
+        if request.user.is_anonymous:
+            return Response({"error": "User not logged in"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        username = request.user.username
+        password = request.user.password
+        return Response({"username": username,"password":password }, status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return Response({"message": "Logged in successfully"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class Logout(APIView):
+    def get(self, request):
+        logout(request)
+        return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
+    
+
+
+
 class Users(APIView):
 
     def get(self, request):
@@ -42,8 +76,10 @@ class Users(APIView):
 
 
 class contacts(APIView):
-    def get(self, request):
-        res = Contact.objects.all()
+    def get(self, request,user):
+        
+        user_id = get_user_model().objects.get(username=user)
+        res = Contact.objects.filter(user = user_id)
         serializer = contactSerializer(res, many=True)
 
         return Response(serializer.data, status=200)
@@ -118,8 +154,9 @@ class contactDetail(APIView):
 
 class Favourites_view(APIView):
 
-    def get(self, request, user_pk):
+    def get(self, request, user):
 
+        user_pk = get_user_model().objects.get(username=user)
         res = Fav_contacts.objects.filter(user=user_pk)
         list = []
 
@@ -156,8 +193,9 @@ class Favourites_view_Post(APIView):
 
 
 class Deleted_view(APIView):
-    def get(self, request):
-        res = DeletedContacts.objects.all()
+    def get(self, request,user):
+        user_id = get_user_model().objects.get(username=user)
+        res = DeletedContacts.objects.filter(user = user_id)
         serializer = DeletedSerializer(res, many=True)
 
         return Response(serializer.data, status=200)
@@ -174,18 +212,20 @@ class Feature_view(APIView):
 
 class Feature_Patch_View(APIView):
 
-    def get(self, request, user_pk):
+    def get(self, request, user):
         try:
-            res = Feature_Flag.objects.get(user=user_pk)
+            user_id = get_user_model().objects.get(username=user)
+            res = Feature_Flag.objects.get(user=user_id)
             serializer = FeaturePatchSerializer(res)
             return Response(serializer.data, status=200)
 
         except Feature_Flag.DoesNotExist:
             return Response({"error": "User not found"}, status=400)
 
-    def patch(self, request, user_pk):
+    def patch(self, request, user):
         try:
-            feature_flag = get_object_or_404(Feature_Flag, user=user_pk)
+            user_id = get_user_model().objects.get(username=user)
+            feature_flag = get_object_or_404(Feature_Flag, user=user_id)
             serializer = FeaturePatchSerializer(
                 feature_flag, data=request.data, partial=True
             )

@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import Api from "../ApiConfig"
 
 
-const Deleted =()=>{
+const Deleted =({user})=>{
 
     const [res, setRes] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${Api}/contacts/deleted`);
+                const response = await fetch(`${Api}/user/${user}/deleted`);
                 const data = await response.json();
                 setRes(data);
                
