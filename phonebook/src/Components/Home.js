@@ -10,18 +10,16 @@ import Favourites from "../IntraComponenets/Favourites";
 import Deleted from "../IntraComponenets/Deleted";
 
 
-const Home = () => {
-    const [user, setUser ] = useState()
+const Home = ({user}) => {
+    
     const [res, setRes] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${Api}/contacts/`);
+                const response = await fetch(`${Api}/user/${user}/contacts/`);
                 const data = await response.json();
                 setRes(data);
-                setUser(data[0].user);
-                let user = (data[0].user)
-                
+
                 const res = await fetch(`${Api}/user/${user}/settings/`,
                     {
                         headers: {
@@ -157,7 +155,7 @@ const Home = () => {
 
                             {favClicked ? <Favourites user={user}/>
                             
-                            :binClicked ? <Deleted />
+                            :binClicked ? <Deleted  user={user}/>
                             : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> }
                             <FootBar  isEdit= {isEdit} handleFootBarClick={handleFootBarClick}/>
                         </div>
