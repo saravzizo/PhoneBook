@@ -17,7 +17,7 @@ const Favourites = ({ user }) => {
             }
         };
         fetchData();
-    }, []);
+    }, [user]);
 
 
 

@@ -38,7 +38,7 @@ const Home = ({user}) => {
        
         fetchData();
         
-    }, []);
+    }, [user]);
 
 
 
@@ -102,11 +102,11 @@ const Home = ({user}) => {
     const [binClicked, setBinClicked] = useState(false);
 
     const handleFootBarClick =(index) =>{
-        if(index == 0){
+        if(index === 0){
             setFavClicked(false);
             setBinClicked(false);
         }
-        else if(index ==1){
+        else if(index ===1){
             setFavClicked(true);
         }
         else{
