@@ -16,8 +16,8 @@ const ContactList = ({ isEdit, res, handleCheck, checkedContacts ,isToggled }) =
                                 <input
                                     className="mr-5 block w-4 h-4"
                                     type="checkbox"
-                                    checked={checkedContacts.includes(index)}
-                                    onChange={() => handleCheck(index)}
+                                    checked={checkedContacts.includes(m.id)}
+                                    onChange={() => handleCheck(m.id)}
                                 />
                                 
                                 <div className="">

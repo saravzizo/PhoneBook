@@ -21,39 +21,49 @@ from .serializers import (
 )
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
+from rest_framework.exceptions import UnsupportedMediaType
 
 
 # Create your views here.
 
 
 class Login(APIView):
-    
+
     def get(self, request):
-        
+
         if request.user.is_anonymous:
-            return Response({"error": "User not logged in"}, status=status.HTTP_400_BAD_REQUEST)
-        
+            return Response(
+                {"error": "User not logged in"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
         username = request.user.username
         password = request.user.password
-        return Response({"username": username,"password":password }, status=status.HTTP_200_OK)
-    
+        return Response(
+            {"username": username, "password": password}, status=status.HTTP_200_OK
+        )
+
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
+        username = request.data.get("username")
+        password = request.data.get("password")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return Response({"message": "Logged in successfully"}, status=status.HTTP_200_OK)
+            return Response(
+                {"message": "Logged in successfully"}, status=status.HTTP_200_OK
+            )
         else:
-            return Response({"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)
-    
+            return Response(
+                {"error": "Invalid username or password"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
 
 class Logout(APIView):
     def get(self, request):
         logout(request)
-        return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
-    
-
+        return Response(
+            {"message": "Logged out successfully"}, status=status.HTTP_200_OK
+        )
 
 
 class Users(APIView):
@@ -76,13 +86,17 @@ class Users(APIView):
 
 
 class contacts(APIView):
-    def get(self, request,user):
-        
-        user_id = get_user_model().objects.get(username=user)
-        res = Contact.objects.filter(user = user_id)
-        serializer = contactSerializer(res, many=True)
+    def get(self, request, user):
+        try:
+            user_id = get_user_model().objects.get(username=user)
+            res = Contact.objects.filter(user=user_id)
+            serializer = contactSerializer(res, many=True)
 
-        return Response(serializer.data, status=200)
+            return Response(serializer.data, status=200)
+
+        except Exception as e:
+
+            return Response({"error": str(e)}, status=200)
 
     def post(self, request):
 
@@ -119,8 +133,47 @@ class contacts(APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=400)
 
+    def delete(self, request, user):
+        try:
+            user_ins = get_user_model().objects.get(username=user)
+            data = request.data.get("checkedContacts", [])
+
+            responses = []
+            for contact_id in data:
+
+                try:
+                    contact = Contact.objects.get(id=contact_id)
+                    DeletedContacts.objects.create(
+                        user=user_ins,
+                        contact_name=contact.contact_name,
+                        contact_number=contact.contact_number,
+                        country_code=contact.country_code,
+                    )
+
+                    deleted_contact = contact.contact_number
+                    contact.delete()
+                    responses.append(deleted_contact)
+
+                except Exception as e:
+                    responses.append(
+                        {
+                            "error": f"Failed to delete contact {contact_id}: {str(e)}"
+                        }
+                    )
+
+            return Response(
+                {
+                    "message": responses,
+                },
+                status=200,
+            )
+
+        except UnsupportedMediaType as e:
+            return Response({"error": str(e)}, status=400)
+
 
 class contactDetail(APIView):
+
     def get(self, request, contact_number):
         try:
             contact = Contact.objects.get(contact_number=contact_number)
@@ -193,9 +246,9 @@ class Favourites_view_Post(APIView):
 
 
 class Deleted_view(APIView):
-    def get(self, request,user):
+    def get(self, request, user):
         user_id = get_user_model().objects.get(username=user)
-        res = DeletedContacts.objects.filter(user = user_id)
+        res = DeletedContacts.objects.filter(user=user_id)
         serializer = DeletedSerializer(res, many=True)
 
         return Response(serializer.data, status=200)
