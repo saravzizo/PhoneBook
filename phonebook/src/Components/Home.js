@@ -101,20 +101,27 @@ const Home = ({user}) => {
     const [favClicked, setFavClicked] = useState(false);
     const [binClicked, setBinClicked] = useState(false);
 
+    const [disableEdit, setDisableEdit] = useState(false);
+
     const handleFootBarClick =(index) =>{
         if(index === 0){
             setFavClicked(false);
             setBinClicked(false);
+            setDisableEdit(false);
         }
         else if(index ===1){
             setFavClicked(true);
+            setDisableEdit(true)
         }
         else{
             setFavClicked(false)
             setBinClicked(true);
+            setDisableEdit(true)
         }
 
     }
+
+    
 
     return (
 
@@ -133,7 +140,7 @@ const Home = ({user}) => {
                                     <span className="grow "></span>
                                     {isEdit ? <p className="text-lg font-semibold cursor-pointer" onClick={() => setIsEdit(false)}>Cancel</p> : null}
 
-                                    {!isEdit && <p className="text-xl font-semibold pl-5 cursor-pointer" onClick={handleEdit}>Edit</p>}
+                                    {!disableEdit && !isEdit && <p className="text-xl font-semibold pl-5 cursor-pointer" onClick={handleEdit}>Edit</p>}
                                     {!isEdit && <p className="text-3xl px-5 cursor-pointer"><i className="bi bi-plus" onClick={handlePlus}></i></p>}
                                     {!isEdit && <p className="text-xl cursor-pointer"><i className="bi bi-gear" onClick={handleSettings}></i></p>}
                                 </div>
@@ -157,7 +164,7 @@ const Home = ({user}) => {
                             
                             :binClicked ? <Deleted  user={user}/>
                             : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> }
-                            <FootBar  isEdit= {isEdit} handleFootBarClick={handleFootBarClick}/>
+                            <FootBar checkedContacts={checkedContacts} isEdit= {isEdit} handleFootBarClick={handleFootBarClick}/>
                         </div>
 
                        

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-const FootBar = ({ isEdit , handleFootBarClick}) => {
+const FootBar = ({ checkedContacts,isEdit , handleFootBarClick}) => {
 
     const [isClicked, setIsClicked] = useState([true, false, false]);
 
@@ -17,7 +17,7 @@ const FootBar = ({ isEdit , handleFootBarClick}) => {
             {
                 isEdit ?
                     <div className="h-10 w-full flex items-center justify-center p-8 border-t border-gray-300 border-opacity-20 " style={{ position: "sticky", bottom: "0", backgroundColor: "black" }}>
-                        <button className='text-blue-500'>Delete</button>
+                       <button className={checkedContacts.length === 0 ? `text-gray-500` : `text-blue-500`}  disabled={checkedContacts.length === 0}>Delete</button>
                     </div>
                     :
                     <div className="h-10 w-full flex items-center justify-center p-8 border-t border-gray-300 border-opacity-20 " style={{ position: "sticky", bottom: "0", backgroundColor: "black" }}>
