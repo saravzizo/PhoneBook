@@ -24,14 +24,16 @@ function App() {
     localStorage.setItem('user', user);
   }, [isLoggedIn,user]);
 
+  const [isThemeToggled, setIsThemeToggled] = useState(true);
+
   
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
   return (
-    <div className="App" style={{backgroundColor:"#0e0e0e"}}>
-      {isLoggedIn ? <Home  user={user}/> : <Login onLogin={handleLogin} setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>}
+    <div className={`App ${isThemeToggled ?"bg-black" :"bg-white" }`}  >
+      {isLoggedIn ? <Home  user={user} setIsThemeToggled={setIsThemeToggled} isThemeToggled={isThemeToggled}/> : <Login onLogin={handleLogin} setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>}
     </div>
   );
 }

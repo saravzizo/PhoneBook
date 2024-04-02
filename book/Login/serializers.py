@@ -37,7 +37,14 @@ class FeatureSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
         
-class FeaturePatchSerializer(serializers.ModelSerializer):
+class NumberFeatureFlagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feature_Flag
         fields = ['id', 'Number_Feature_Flag']
+        
+        
+class DarkModeFeatureFlagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feature_Flag
+        fields = ['id', 'Dark_mode_feature']
+        
