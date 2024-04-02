@@ -1,5 +1,5 @@
 
-const ContactList = ({ isEdit, res, handleCheck, checkedContacts ,isToggled }) => {
+const ContactList = ({isThemeToggled, isEdit, res, handleCheck, checkedContacts ,isToggled }) => {
 
     const OrderByLetter = "A"
 
@@ -21,14 +21,14 @@ const ContactList = ({ isEdit, res, handleCheck, checkedContacts ,isToggled }) =
                                 />
                                 
                                 <div className="">
-                                    <p className="text-md font-normal text-gray-200">{m.contact_name}</p>
-                                    {isToggled && <p className="text-xs text-gray-400">+{m.country_code} {m.contact_number}</p>}
+                                    <p className={isThemeToggled ? "text-md font-normal text-gray-200" :"text-md font-normal text-black"}>{m.contact_name}</p>
+                                    {isToggled && <p className={ isThemeToggled ? "text-xs text-gray-400" : "text-xs text-black"}>+{m.country_code} {m.contact_number}</p>}
                                 </div>
                             </div>
 
                             : <div key={index} className="flex flex-col my-6">
-                                <p className="text-md font-normal text-gray-200">{m.contact_name}</p>
-                                {isToggled && <p className="text-xs text-gray-400">+{m.country_code} {m.contact_number}</p>}
+                                <p className={isThemeToggled ? "text-md font-normal text-gray-200" :"text-md font-normal text-black"}>{m.contact_name}</p>
+                                {isToggled && <p className={ isThemeToggled ? "text-xs text-gray-400" : "text-xs text-black"}>+{m.country_code} {m.contact_number}</p>}
                             </div>
                     )
                     )

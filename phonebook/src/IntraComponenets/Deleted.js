@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Api from "../ApiConfig"
 
 
-const Deleted =({user})=>{
+const Deleted =({isThemeToggled, user})=>{
 
     const [res, setRes] = useState([]);
     useEffect(() => {
@@ -30,8 +30,8 @@ const Deleted =({user})=>{
                 [...res].sort((a, b) => a.contact_name.localeCompare(b.contact_name)).map((m,index) => 
                     
                 <div key={index} className="flex flex-col my-6">
-                    <p className="text-md font-normal text-gray-200">{m.contact_name}</p>
-                    <p className="text-xs text-gray-400">+{m.country_code} {m.contact_number}</p>
+                    <p className={isThemeToggled ? "text-md font-normal text-gray-200" :"text-md font-normal text-black"}>{m.contact_name}</p>
+                    <p className={isThemeToggled ? "text-xs text-gray-400" : "text-xs text-black"}>+{m.country_code} {m.contact_number}</p>
                 </div>
                 ) 
             }

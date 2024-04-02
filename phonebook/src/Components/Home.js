@@ -132,10 +132,10 @@ const Home = ({user}) => {
         <>
             {showSettings ? <Settings handleBack={handleSettingsBack} user={user} isToggled = {isToggled} handleNumberToggle= {handleNumberToggle} isThemeToggled={isThemeToggled} handleThemeToggle={handleThemeToggle}/>
 
-                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack}  />
+                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack} isThemeToggled={isThemeToggled} />
 
                     :
-                        <div className="container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen " >
+                        <div className={isThemeToggled?"container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen" : "container bg-white text-black xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen"  } >
                             <div className="sticky">
                                 <div className="flex items-center px-6 mb-6 justify-center pt-8 pb-3">
 
@@ -144,12 +144,12 @@ const Home = ({user}) => {
                                     <span className="grow "></span>
                                     {isEdit ? <p className="text-lg font-semibold cursor-pointer" onClick={() => setIsEdit(false)}>Cancel</p> : null}
 
-                                    {!disableEdit && !isEdit && <button className={ res.length === 0 ? `text-gray-500 text-xl font-semibold pl-5 cursor-pointer` : `text-white text-xl font-semibold pl-5 cursor-pointer`} onClick={handleEdit} disabled={res.length === 0} >Edit</button>}
+                                    {!disableEdit && !isEdit && <button className={ res.length === 0 ? `text-gray-500 text-xl font-semibold pl-5 cursor-pointer` : ` text-xl font-semibold pl-5 cursor-pointer`} onClick={handleEdit} disabled={res.length === 0} >Edit</button>}
                                     {!isEdit && <p className="text-3xl px-5 cursor-pointer"><i className="bi bi-plus" onClick={handlePlus}></i></p>}
                                     {!isEdit && <p className="text-xl cursor-pointer"><i className="bi bi-gear" onClick={handleSettings}></i></p>}
                                 </div>
 
-                                <Search />
+                                <Search isThemeToggled={isThemeToggled} />
 
                                 <div className="flex items-center px-6 mt-10 cursor-pointer ">
                                     <p className="text-sm">vivo Customer Care</p>
@@ -164,12 +164,12 @@ const Home = ({user}) => {
                                 </div>
                             </div>
 
-                            {favClicked ? <Favourites user={user}/>
+                            {favClicked ? <Favourites isThemeToggled={isThemeToggled} user={user}/>
                             
-                            : binClicked ? <Deleted  user={user}/>
-                            : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> 
+                            : binClicked ? <Deleted isThemeToggled={isThemeToggled} user={user}/>
+                            : <ContactList isThemeToggled={isThemeToggled} isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> 
                         }
-                            <FootBar user ={user} checkedContacts={checkedContacts} isEdit= {isEdit} handleFootBarClick={handleFootBarClick} />
+                            <FootBar isThemeToggled={isThemeToggled} user ={user} checkedContacts={checkedContacts} isEdit= {isEdit} handleFootBarClick={handleFootBarClick} />
                         </div>
 
                        
