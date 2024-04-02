@@ -17,7 +17,8 @@ from .serializers import (
     FavSerializer,
     DeletedSerializer,
     FeatureSerializer,
-    FeaturePatchSerializer,
+    NumberFeatureFlagSerializer,
+    DarkModeFeatureFlagSerializer
 )
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
@@ -264,13 +265,13 @@ class Feature_view(APIView):
         return Response(serializer.data, status=200)
 
 
-class Feature_Patch_View(APIView):
+class Number_feature_view(APIView):
 
     def get(self, request, user):
         try:
             user_id = get_user_model().objects.get(username=user)
             res = Feature_Flag.objects.get(user=user_id)
-            serializer = FeaturePatchSerializer(res)
+            serializer = FeatureSerializer(res)
             return Response(serializer.data, status=200)
 
         except Feature_Flag.DoesNotExist:
@@ -280,9 +281,20 @@ class Feature_Patch_View(APIView):
         try:
             user_id = get_user_model().objects.get(username=user)
             feature_flag = get_object_or_404(Feature_Flag, user=user_id)
-            serializer = FeaturePatchSerializer(
-                feature_flag, data=request.data, partial=True
-            )
+            
+            print("============================", request.data)
+            
+            if 'Number_Feature_Flag' in request.data:
+                serializer = NumberFeatureFlagSerializer(
+                    feature_flag, data=request.data, partial=True
+                )
+            elif 'Dark_mode_feature' in request.data:
+                serializer = DarkModeFeatureFlagSerializer(
+                    feature_flag, data=request.data, partial=True
+                )
+            else:
+                return Response({"error": "Invalid field in request data"}, status=400)
+
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=200)
@@ -290,3 +302,4 @@ class Feature_Patch_View(APIView):
                 return Response(serializer.errors, status=400)
         except Exception as e:
             return Response({"error": str(e)}, status=400)
+

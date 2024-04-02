@@ -29,6 +29,7 @@ const Home = ({user}) => {
                     });
                 const r = await res.json();
                 setIsToggled(r.Number_Feature_Flag)
+                setIsThemeToggled(r.Dark_mode_feature)
     
             } catch (error) {
                 console.error("Error", error);
@@ -91,9 +92,13 @@ const Home = ({user}) => {
 
 
     const [isToggled, setIsToggled] = useState(true);
+    const [isThemeToggled, setIsThemeToggled] = useState(true);
 
     const handleNumberToggle = () => {
         setIsToggled(!isToggled);
+    }
+    const handleThemeToggle = () => {
+        setIsThemeToggled(!isThemeToggled);
     }
 
 
@@ -125,7 +130,7 @@ const Home = ({user}) => {
     return (
 
         <>
-            {showSettings ? <Settings handleBack={handleSettingsBack} user={user} isToggled = {isToggled} handleNumberToggle= {handleNumberToggle} />
+            {showSettings ? <Settings handleBack={handleSettingsBack} user={user} isToggled = {isToggled} handleNumberToggle= {handleNumberToggle} isThemeToggled={isThemeToggled} handleThemeToggle={handleThemeToggle}/>
 
                 : showPlus ? <CreateContacts handlePlusBack={handlePlusBack}  />
 

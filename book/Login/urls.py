@@ -15,7 +15,7 @@ urlpatterns = [
     path('user/<str:user>/deleted/' , views.Deleted_view.as_view() ),
     path('user/<str:user>/contacts/', views.contacts.as_view()),
     path('user/<str:user>/favourites/', views.Favourites_view.as_view()),
-    path('user/<str:user>/settings/', views.Feature_Patch_View.as_view()),
+    path('user/<str:user>/settings/', views.Number_feature_view.as_view()),
 
     
 ]

@@ -16,7 +16,7 @@ const FootBar = ({user, checkedContacts,isEdit , handleFootBarClick}) => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${Api}/user/${user}/contacts/`,
+            await fetch(`${Api}/user/${user}/contacts/`,
             {
                 method:"DELETE",
 
