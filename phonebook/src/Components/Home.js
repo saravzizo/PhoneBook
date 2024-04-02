@@ -13,7 +13,6 @@ import Deleted from "../IntraComponenets/Deleted";
 const Home = ({user}) => {
     
     const [res, setRes] = useState([]);
-    console.log(res.length)
     useEffect(() => {
         const fetchData = async () => {
             try {

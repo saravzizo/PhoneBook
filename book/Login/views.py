@@ -152,20 +152,21 @@ class contacts(APIView):
 
                     deleted_contact = contact.contact_number
                     contact.delete()
-                    responses.append(deleted_contact)
+                    responses.append(f"{deleted_contact} Contacts Deleted Successfully")
+                    flag = 200
 
                 except Exception as e:
                     responses.append(
-                        {
-                            "error": f"Failed to delete contact {contact_id}: {str(e)}"
-                        }
+                        {"error": f"Failed to delete contact {contact_id}: {str(e)}"}
                     )
+                    flag=400
 
             return Response(
                 {
                     "message": responses,
                 },
-                status=200,
+                
+                status=flag,
             )
 
         except UnsupportedMediaType as e:
