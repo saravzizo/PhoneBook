@@ -10,7 +10,7 @@ import Favourites from "../IntraComponenets/Favourites";
 import Deleted from "../IntraComponenets/Deleted";
 
 
-const Home = ({ user }) => {
+const Home = ({ user, setIsThemeToggled , isThemeToggled}) => {
 
     const [res, setRes] = useState([]);
     useEffect(() => {
@@ -92,7 +92,7 @@ const Home = ({ user }) => {
 
 
     const [isToggled, setIsToggled] = useState(true);
-    const [isThemeToggled, setIsThemeToggled] = useState(true);
+    
 
     const handleNumberToggle = () => {
         setIsToggled(!isToggled);

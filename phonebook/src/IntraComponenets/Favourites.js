@@ -26,7 +26,7 @@ const Favourites = ({ user, isThemeToggled, setTotalFav }) => {
     return (
         <div >
             <p className="text-sm px-6 mt-6 mb-4 ">Favourites contacts</p>
-            <div className="px-6 mb-6  sticky overflow-y-scroll" style={{ maxHeight: "55vh", minHeight: "55vh", scrollbarWidth: "none" }} >
+            <div className="px-6 pb-6  sticky overflow-y-scroll" style={{ maxHeight: "55vh", minHeight: "55vh", scrollbarWidth: "none" }} >
 
                 {
                     [...res].sort((a, b) => a.contact_name.localeCompare(b.contact_name)).map((m, index) =>
