@@ -45,7 +45,7 @@ const FootBar = ({user, checkedContacts,isEdit , handleFootBarClick, isThemeTogg
         <div>
             {
                 isEdit ?
-                    <div className="h-10 w-full flex items-center justify-center p-8 border-t border-gray-300 border-opacity-20 " style={{ position: "sticky", bottom: "0", backgroundColor: "black" }}>
+                    <div className={`h-10 w-full flex items-center justify-center p-8 border-t ${isThemeToggled ?"border-gray-300 border-opacity-20" :"border-black border-opacity-30"} `} style={{ position: "sticky", bottom: "0" }}>
                        <button className={checkedContacts.length === 0 ? `text-gray-500` : `text-blue-500` } onClick={handleDeleteButton}  disabled={checkedContacts.length === 0}>Delete</button>
                     </div>
                     :
