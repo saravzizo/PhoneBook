@@ -18,7 +18,7 @@ const Deleted =({user})=>{
             }
         };
         fetchData();
-    }, []);
+    }, [user]);
 
 
     return (

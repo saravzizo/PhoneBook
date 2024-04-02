@@ -38,7 +38,7 @@ const Home = ({user}) => {
        
         fetchData();
         
-    }, []);
+    }, [user]);
 
 
 
@@ -84,7 +84,7 @@ const Home = ({user}) => {
         if (checkedContacts.length === res.length) {
             setCheckedContacts([]);
         } else {
-            setCheckedContacts(res.map((m,index ) => index));
+            setCheckedContacts(res.map((m) => m.id));
         }
     };
 
@@ -101,20 +101,26 @@ const Home = ({user}) => {
     const [favClicked, setFavClicked] = useState(false);
     const [binClicked, setBinClicked] = useState(false);
 
+    const [disableEdit, setDisableEdit] = useState(false);
+
     const handleFootBarClick =(index) =>{
-        if(index == 0){
+        if(index === 0){
             setFavClicked(false);
             setBinClicked(false);
+            setDisableEdit(false);
         }
-        else if(index ==1){
+        else if(index ===1){
             setFavClicked(true);
+            setDisableEdit(true)
         }
         else{
             setFavClicked(false)
             setBinClicked(true);
+            setDisableEdit(true)
         }
 
     }
+
 
     return (
 
@@ -128,12 +134,12 @@ const Home = ({user}) => {
                             <div className="sticky">
                                 <div className="flex items-center px-6 mb-6 justify-center pt-8 pb-3">
 
-                                    {isEdit ? <p className="text-lg font-semibold" onClick={handleSelectAll}>Select All</p> : <p className="text-2xl font-semibold">Contacts</p>}
+                                    {isEdit ? <p className="text-lg font-semibold cursor-pointer" onClick={handleSelectAll}>Select All</p> : <p className="text-2xl font-semibold">Contacts</p>}
                                     
                                     <span className="grow "></span>
                                     {isEdit ? <p className="text-lg font-semibold cursor-pointer" onClick={() => setIsEdit(false)}>Cancel</p> : null}
 
-                                    {!isEdit && <p className="text-xl font-semibold pl-5 cursor-pointer" onClick={handleEdit}>Edit</p>}
+                                    {!disableEdit && !isEdit && <button className={ res.length === 0 ? `text-gray-500 text-xl font-semibold pl-5 cursor-pointer` : `text-white text-xl font-semibold pl-5 cursor-pointer`} onClick={handleEdit} disabled={res.length === 0} >Edit</button>}
                                     {!isEdit && <p className="text-3xl px-5 cursor-pointer"><i className="bi bi-plus" onClick={handlePlus}></i></p>}
                                     {!isEdit && <p className="text-xl cursor-pointer"><i className="bi bi-gear" onClick={handleSettings}></i></p>}
                                 </div>
@@ -155,9 +161,10 @@ const Home = ({user}) => {
 
                             {favClicked ? <Favourites user={user}/>
                             
-                            :binClicked ? <Deleted  user={user}/>
-                            : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> }
-                            <FootBar  isEdit= {isEdit} handleFootBarClick={handleFootBarClick}/>
+                            : binClicked ? <Deleted  user={user}/>
+                            : <ContactList isEdit= {isEdit} res= {res}  handleCheck= {handleCheck}  checkedContacts={checkedContacts} isToggled= {isToggled}/> 
+                        }
+                            <FootBar user ={user} checkedContacts={checkedContacts} isEdit= {isEdit} handleFootBarClick={handleFootBarClick} />
                         </div>
 
                        

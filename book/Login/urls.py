@@ -8,11 +8,8 @@ urlpatterns = [
     path('Logout/', views.Logout.as_view()),
     
     path('users/', views.Users.as_view()),
-    
     path('contact/<str:contact_number>/',  views.contactDetail.as_view() ),
     path('contacts/favourites/', views.Favourites_view_Post.as_view()),
-    
-    
     path('AllUsers/settings/', views.Feature_view.as_view()),
     
     path('user/<str:user>/deleted/' , views.Deleted_view.as_view() ),

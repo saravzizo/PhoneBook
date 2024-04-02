@@ -19,6 +19,7 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle }) => {
 
         try {
             const response =  fetch(`${Api}/Logout/`);
+            console.log(response);
             localStorage.removeItem('isLoggedIn');
             localStorage.clear();
             window.location.reload();

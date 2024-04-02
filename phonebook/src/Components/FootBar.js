@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react'
-const FootBar = ({ isEdit , handleFootBarClick}) => {
+import Api from "../ApiConfig"
+
+const FootBar = ({user, checkedContacts,isEdit , handleFootBarClick}) => {
 
     const [isClicked, setIsClicked] = useState([true, false, false]);
 
@@ -12,12 +14,39 @@ const FootBar = ({ isEdit , handleFootBarClick}) => {
     };
 
 
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`${Api}/user/${user}/contacts/`,
+            {
+                method:"DELETE",
+
+                body: JSON.stringify({checkedContacts}),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                
+            });
+            
+        } catch (error) {
+            console.error("Error", error);
+        }
+    };
+
+    const handleDeleteButton =(e)=>{
+        e.preventDefault();
+        fetchData();
+        window.location.reload();
+        
+    }
+
+
+
     return (
         <div>
             {
                 isEdit ?
                     <div className="h-10 w-full flex items-center justify-center p-8 border-t border-gray-300 border-opacity-20 " style={{ position: "sticky", bottom: "0", backgroundColor: "black" }}>
-                        <button className='text-blue-500'>Delete</button>
+                       <button className={checkedContacts.length === 0 ? `text-gray-500` : `text-blue-500`} onClick={handleDeleteButton}  disabled={checkedContacts.length === 0}>Delete</button>
                     </div>
                     :
                     <div className="h-10 w-full flex items-center justify-center p-8 border-t border-gray-300 border-opacity-20 " style={{ position: "sticky", bottom: "0", backgroundColor: "black" }}>
