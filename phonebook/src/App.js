@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className={`App ${isThemeToggled ?"bg-black" :"bg-white" }`}  >
-      {isLoggedIn ? <Home  user={user} setIsThemeToggled={setIsThemeToggled} isThemeToggled={isThemeToggled}/> : <Login onLogin={handleLogin} setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>}
+      {isLoggedIn ? <Home  user={user} setIsThemeToggled={setIsThemeToggled} isThemeToggled={isThemeToggled}/> : <Login onLogin={handleLogin} setIsLoggedIn={setIsLoggedIn} setUser={setUser} isThemeToggled={isThemeToggled}/>}
     </div>
   );
 }

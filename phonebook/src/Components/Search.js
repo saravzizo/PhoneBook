@@ -1,17 +1,21 @@
 const Search = ({ isThemeToggled, res, favClicked, binClicked, totalFav, totalDel }) => {
 
     let Totalcount = 0
+    let type =""
     if (favClicked) {
         Totalcount = totalFav
+        type = "favourite"
     }
     else if (binClicked) {
         Totalcount = totalDel
+        type = "deleted contact"
     }
     else {
         Totalcount = res.length
+        type = "contact"
     }
 
-    const count = `Search among ${Totalcount} contact(s)`
+    const count = `Search among ${Totalcount} ${type}(s)`
 
 
 
