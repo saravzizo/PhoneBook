@@ -252,31 +252,28 @@ class Favourites_view(APIView):
             list.append(contact)
 
         serializer = contactSerializer(list, many=True)
-
         return Response(serializer.data)
 
-
-class Favourites_view_Post(APIView):
-
-    def post(self, request, user_pk):
+    
+    def post(self, request, user):
         try:
-            user = request.user
-            contact_ids = request.data
-
-            if isinstance(contact_ids, list):
-                for contact_id in contact_ids:
-                    contact = get_object_or_404(Contact, id=contact_id)
-                    Fav_contacts.objects.create(user=user, fav_Contacts=contact)
+            user_pk = get_user_model().objects.get(username=user)
+            
+            fav_contact = request.data.get("fav_contact")
+            
+            contact = get_object_or_404(Contact, id=fav_contact)
+            
+            fav = Fav_contacts.objects.filter(user=user_pk, fav_Contacts=contact)
+            if fav:
+                return Response({"message" : f"Contact {fav_contact} already added to favourites"})
             else:
-                contact = get_object_or_404(Contact, id=contact_ids)
-                Fav_contacts.objects.create(user=user, fav_Contacts=contact)
-
-            res = Fav_contacts.objects.all()
-            return Response(res, status=200)
-
+                Fav_contacts.objects.create(user=user_pk, fav_Contacts=contact)
+                return Response({"message" : f"Contact {fav_contact} added to favourites successfully"})
+            
         except Exception as e:
             return Response({"error": str(e)}, status=400)
-
+            
+        
 
 class Deleted_view(APIView):
     def get(self, request, user):
