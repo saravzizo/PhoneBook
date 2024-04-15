@@ -134,7 +134,7 @@ const Home = ({ user, setIsThemeToggled , isThemeToggled}) => {
         <>
             {showSettings ? <Settings handleBack={handleSettingsBack} user={user} isToggled={isToggled} handleNumberToggle={handleNumberToggle} isThemeToggled={isThemeToggled} handleThemeToggle={handleThemeToggle} />
 
-                : showPlus ? <CreateContacts handlePlusBack={handlePlusBack} isThemeToggled={isThemeToggled} />
+                : showPlus ? <CreateContacts user ={user} handlePlusBack={handlePlusBack} isThemeToggled={isThemeToggled} />
 
                     :
                     <div className={isThemeToggled ? "container bg-black text-white xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen" : "container bg-white text-black xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen"} >

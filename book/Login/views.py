@@ -99,19 +99,21 @@ class contacts(APIView):
 
             return Response({"error": str(e)}, status=200)
 
-    def post(self, request):
+    def post(self, request,user):
 
         try:
             data = request.data
-            user = request.user
+            user = user
+            user_id = get_user_model().objects.get(username=user)
 
             if isinstance(data, list):
                 for item in data:
                     contact_name = item.get("contact_name")
                     contact_number = item.get("contact_number")
                     country_code = item.get("country_code")
+                    
                     Contact.objects.create(
-                        user=user,
+                        user=user_id,
                         contact_name=contact_name,
                         contact_number=contact_number,
                         country_code=country_code,
@@ -120,8 +122,37 @@ class contacts(APIView):
                 contact_name = data.get("contact_name")
                 contact_number = data.get("contact_number")
                 country_code = data.get("country_code")
+                
+                if(contact_name == None or contact_name == ""):
+                    return Response(
+                        {"Name_Error": "Contact name should not be empty"}, status=400
+                    )
+                elif (contact_number == None or contact_number == ""):
+                    return Response(
+                        {"Number_Error": "Contact number should not be empty"}, status=400
+                    )
+                elif(country_code == None or country_code == ""):
+                    return Response(
+                        {"Code_Error": "Country code should not be empty"}, status=400
+                    )
+                 
+                 
+                    
+                if Contact.objects.filter(contact_number=contact_number).exists():
+                    return Response(
+                        {"Number_Error": "Contact number already exists"}, status=400
+                    )
+                if(len(contact_number) != 10):
+                    return Response(
+                        {"Number_Error": "Number should contain 10 digits"}, status=400
+                    )
+                if(len(country_code) > 3):
+                    return Response(
+                        {"Code_Error": "Code shouldn't more than 3 digits"}, status=400
+                    )
+                    
                 Contact.objects.create(
-                    user=user,
+                    user=user_id,
                     contact_name=contact_name,
                     contact_number=contact_number,
                     country_code=country_code,
