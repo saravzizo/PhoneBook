@@ -282,8 +282,6 @@ class Number_feature_view(APIView):
             user_id = get_user_model().objects.get(username=user)
             feature_flag = get_object_or_404(Feature_Flag, user=user_id)
             
-            print("============================", request.data)
-            
             if 'Number_Feature_Flag' in request.data:
                 serializer = NumberFeatureFlagSerializer(
                     feature_flag, data=request.data, partial=True
