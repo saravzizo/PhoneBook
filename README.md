@@ -33,7 +33,7 @@
 # Navigation Guide<br>
 <br>
 <br>
-<strong>To Login to the App</strong> <br>
+<strong>To Login to the App:</strong><br>
 1. Run the backend Server<br>
 2. Navigate to the Django-admin portal<br>
 3. Register a new your<br>
@@ -43,6 +43,8 @@
 
 ![1](https://github.com/saravzizo/PhoneBook/assets/106132207/0f1308b8-aea6-4e22-808a-433f483d570c)
 
+<br>
+<br>
 
 <strong>Adding a New Contact:</strong><br>
 1. Locate and click the "+" button in the contacts section.<br>
@@ -56,6 +58,8 @@
 
 
 
+<br>
+<br>
 
 <strong>To Add Favourite Contacts:</strong><br>
 1. By clicking the "star icon" beside the contacts, you can able to add/delete the favourites<br>
@@ -67,6 +71,8 @@
 ![7](https://github.com/saravzizo/PhoneBook/assets/106132207/ad1c619e-2c49-43d9-8ea6-f05824a34754)
 
 
+<br>
+<br>
 
 <strong>To Delete Contacts:</strong><br>
 1. Click on the Edit button on the Contacts section<br>
@@ -80,6 +86,9 @@
 
 ![11](https://github.com/saravzizo/PhoneBook/assets/106132207/72c061cb-e25c-4a75-8e22-14a9c1933d41)
 
+<br>
+<br>
+
 <strong>To View Deleted Contacts:</strong><br>
 1. Navigate to the "Deleted" section to view the Deleted Contacts<br>
 <br>
@@ -87,6 +96,9 @@
 ![9](https://github.com/saravzizo/PhoneBook/assets/106132207/ad894c0f-f964-4417-83ef-3bda1cdfb0a9)
 
 ![10](https://github.com/saravzizo/PhoneBook/assets/106132207/018c5565-0390-429d-b0ae-597471e0bfc4)
+
+<br>
+<br>
 
 <strong>To change the theme, follow these steps:</strong><br>
 1. Open the settings menu.<br>
@@ -98,6 +110,9 @@
 ![13](https://github.com/saravzizo/PhoneBook/assets/106132207/a4f356c4-b9a5-4808-ae81-993a8e4c78cf)
 
 
+<br>
+<br>
+
 <strong>To modify the "Display Contact Number" setting, follow these steps:</strong><br>
 1. Open the settings menu.<br>
 2. Toggle the "Display Contact Number" option to enable or disable it.<br>
@@ -106,6 +121,8 @@
 
 ![Screenshot 2024-04-16 121403](https://github.com/saravzizo/PhoneBook/assets/106132207/4e700558-b1cf-4517-8c0b-e0662d137cdd)
 
+<br>
+<br>
 
 
 
