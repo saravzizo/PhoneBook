@@ -52,7 +52,8 @@
 
 ![2](https://github.com/saravzizo/PhoneBook/assets/106132207/a2629d7a-5655-4770-996c-15e23445e5c8)
 
-![4](https://github.com/saravzizo/PhoneBook/assets/106132207/dabbc611-2d00-468e-8295-5782f2760f67)
+![5](https://github.com/saravzizo/PhoneBook/assets/106132207/023deb42-6fb0-422d-83e7-7242b52d3a97)
+
 
 
 
@@ -60,7 +61,8 @@
 1. By clicking the "star icon" beside the contacts, you can able to add/delete the favourites<br>
 2. Favourites will be refelcted on the "Favourites" section<br>
 <br>
-![3](https://github.com/saravzizo/PhoneBook/assets/106132207/8335be66-42b7-43ad-957a-c0149769cdf1)
+
+![3](https://github.com/saravzizo/PhoneBook/assets/106132207/4ba279e1-2baf-40ad-8a26-af653211dfc6)
 
 ![7](https://github.com/saravzizo/PhoneBook/assets/106132207/ad1c619e-2c49-43d9-8ea6-f05824a34754)
 
@@ -75,13 +77,16 @@
 <br>
 
 ![6](https://github.com/saravzizo/PhoneBook/assets/106132207/2e0e86fe-6a80-4034-897b-2d8f8ed00be6)
+
 ![11](https://github.com/saravzizo/PhoneBook/assets/106132207/72c061cb-e25c-4a75-8e22-14a9c1933d41)
 
 <strong>To View Deleted Contacts:</strong><br>
 1. Navigate to the "Deleted" section to view the Deleted Contacts<br>
 <br>
-![10](https://github.com/saravzizo/PhoneBook/assets/106132207/03b5354d-ea57-4b05-9404-4ecfd68040e5)
-![9](https://github.com/saravzizo/PhoneBook/assets/106132207/02ee1c3e-20ea-4101-a3ed-558b6f593489)
+
+![9](https://github.com/saravzizo/PhoneBook/assets/106132207/ad894c0f-f964-4417-83ef-3bda1cdfb0a9)
+
+![10](https://github.com/saravzizo/PhoneBook/assets/106132207/018c5565-0390-429d-b0ae-597471e0bfc4)
 
 <strong>To change the theme, follow these steps:</strong><br>
 1. Open the settings menu.<br>
@@ -89,6 +94,7 @@
 <br>
 
 ![12](https://github.com/saravzizo/PhoneBook/assets/106132207/7f731d13-fa6f-44a7-99d1-edba07d7e468)
+
 ![13](https://github.com/saravzizo/PhoneBook/assets/106132207/a4f356c4-b9a5-4808-ae81-993a8e4c78cf)
 
 
