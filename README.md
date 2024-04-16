@@ -34,11 +34,11 @@
 <br>
 <br>
 <strong>To Login to the App</strong> <br>
-1. Run the backend Server<br>
-2. Navigate to the Django-admin portal<br>
-3. Register a new your<br>
-4. Run the frontend<br>
-5. Now you can able to login with the registered credentials<br>
+  - 1. Run the backend Server<br>
+  - 2. Navigate to the Django-admin portal<br>
+  3. Register a new your<br>
+  4. Run the frontend<br>
+  5. Now you can able to login with the registered credentials<br>
 <br>
 <strong>Adding a New Contact:</strong><br>
 1. Locate and click the "+" button in the contacts section.<br>
