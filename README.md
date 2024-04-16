@@ -51,18 +51,19 @@
 <br>
 
 ![2](https://github.com/saravzizo/PhoneBook/assets/106132207/a2629d7a-5655-4770-996c-15e23445e5c8)
-![3](https://github.com/saravzizo/PhoneBook/assets/106132207/07c263cd-b68b-4f5f-9db1-e0ac7f51862e)
 
 ![4](https://github.com/saravzizo/PhoneBook/assets/106132207/dabbc611-2d00-468e-8295-5782f2760f67)
-![5](https://github.com/saravzizo/PhoneBook/assets/106132207/88120b17-d5b5-4c41-aca3-6c53e452b834)
+
 
 
 <strong>To Add Favourite Contacts:</strong><br>
 1. By clicking the "star icon" beside the contacts, you can able to add/delete the favourites<br>
 2. Favourites will be refelcted on the "Favourites" section<br>
 <br>
+![3](https://github.com/saravzizo/PhoneBook/assets/106132207/8335be66-42b7-43ad-957a-c0149769cdf1)
 
-![7](https://github.com/saravzizo/PhoneBook/assets/106132207/1aa9d8cd-e57d-402e-9d9b-d9842c849771)
+![7](https://github.com/saravzizo/PhoneBook/assets/106132207/ad1c619e-2c49-43d9-8ea6-f05824a34754)
+
 
 
 <strong>To Delete Contacts:</strong><br>
