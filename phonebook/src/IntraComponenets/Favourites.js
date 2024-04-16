@@ -3,29 +3,27 @@ import Api from "../ApiConfig"
 
 const Favourites = ({ user, isThemeToggled, setTotalFav, searchTerm }) => {
 
+
     const [res, setRes] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`${Api}/user/${user}/favourites`);
                 const data = await response.json();
-                setRes(data);
                 setTotalFav(data.length)
-
+                setRes(data)
 
             } catch (error) {
                 console.error("Error", error);
             }
         };
         fetchData();
-    }, [user, setTotalFav]);
-
+    }, [user]);
 
 
     let filteredFav = res.filter(contact =>
         contact.contact_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
 
 
     return (
@@ -42,7 +40,6 @@ const Favourites = ({ user, isThemeToggled, setTotalFav, searchTerm }) => {
                         </div>
                     )
                 }
-
 
             </div>
         </div>
