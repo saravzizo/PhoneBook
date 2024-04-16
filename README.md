@@ -2,47 +2,47 @@
   Vivo Phonebook App Cloned as Web-Application
 
 
-# Technologies Used
+Technologies Used
+<br>
+  Backend: Python, Django REST Framework<br>
+  Frontend: React.js, Tailwind CSS<br>
+  Database: SQLite<br>
 
-Backend: Python, Django REST Framework
-Frontend: React.js, Tailwind CSS
-Database: SQLite
+# Installation<br>
 
-# Installation
+Clone the repository<br>
+  git clone https://github.com/saravzizo/PhoneBook.git<br>
+  cd phonebook<br>
 
-# Clone the repository
-git clone https://github.com/saravzizo/PhoneBook.git
-cd phonebook
-
-# Install dependencies
-npm install
-
-# To Run Frontend
-npm start
-
-
-# To Activate Env
-.\env\Scripts\activate
-
-# To Run Backend
-cd book
-python manage.py runserver
+Install dependencies<br>
+  npm install<br>
+<br>
+To Run Frontend<br>
+  npm start<br>
 
 
-# Screenshots
+To Activate Env<br>
+  .\env\Scripts\activate<br>
 
-# To Login to the App
-1. Run the backend Server
-2. Navigate to the Django-admin portal
-3. Register a new your
-4. Run the frontend
-5. Now you can able to login with the registered credentials
+To Run Backend<br>
+  cd book<br>
+  python manage.py runserver<br>
 
 
-# Adding a New Contact
-1. Locate and click the "+" button in the contacts section.
-2. Fill in Contact Details: Enter the relevant information for the new contact in the provided form.
-3. Click on the "Save" to add the contact
+# Navigation Guide<br>
+<br>
+To Login to the App<br>
+1. Run the backend Server<br>
+2. Navigate to the Django-admin portal<br>
+3. Register a new your<br>
+4. Run the frontend<br>
+5. Now you can able to login with the registered credentials<br>
+
+
+# Adding a New Contact<br>
+1. Locate and click the "+" button in the contacts section.<br>
+2. Fill in Contact Details: Enter the relevant information for the new contact in the provided form.<br>
+3. Click on the "Save" to add the contact<br>
 
 # To Add Favourite Contacts
 1. By clicking the "star icon" beside the contacts, you can able to add/delete the favourites
