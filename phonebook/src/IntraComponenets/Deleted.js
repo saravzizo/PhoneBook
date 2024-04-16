@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Api from "../ApiConfig"
 
 
-const Deleted = ({ isThemeToggled, user, setTotalDel }) => {
+const Deleted = ({ isThemeToggled, user, setTotalDel, searchTerm }) => {
 
 
     const [res, setRes] = useState([]);
@@ -23,8 +23,11 @@ const Deleted = ({ isThemeToggled, user, setTotalDel }) => {
         };
         fetchData();
 
-    }, [user]);
+    }, [user, setTotalDel]);
 
+    let filteredDeleted = res.filter(contact =>
+        contact.contact_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
 
 
@@ -34,7 +37,7 @@ const Deleted = ({ isThemeToggled, user, setTotalDel }) => {
             <div className="px-6 pb-6  sticky overflow-y-scroll" style={{ maxHeight: "55vh", minHeight: "55vh", scrollbarWidth: "none" }} >
                 {
 
-                    [...res].sort((a, b) => a.contact_name.localeCompare(b.contact_name)).map((m, index) =>
+                    [...filteredDeleted].sort((a, b) => a.contact_name.localeCompare(b.contact_name)).map((m, index) =>
 
                         <div key={index} className="flex flex-col my-6">
                             <p className={isThemeToggled ? "text-md font-normal text-gray-200" : "text-md font-normal text-black"}>{m.contact_name}</p>

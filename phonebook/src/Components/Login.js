@@ -1,19 +1,19 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import Api from '../ApiConfig';
 
 
-const Login = ({setIsLoggedIn, setUser}) => {
+const Login = ({ setIsLoggedIn, setUser }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [res , setRes] = useState([]);
+    const [res, setRes] = useState([]);
 
-    
+
 
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${Api}/Login/`,{
+            const response = await fetch(`${Api}/Login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,15 +24,15 @@ const Login = ({setIsLoggedIn, setUser}) => {
                 })
             });
             const data = await response.json();
-            setRes(data)  
-            
+            setRes(data)
+
 
 
             if (response.status === 200) {
                 setIsLoggedIn(true);
                 setUser(username);
             }
-           
+
 
         } catch (error) {
             console.error("Error", error);
@@ -43,7 +43,7 @@ const Login = ({setIsLoggedIn, setUser}) => {
 
         event.preventDefault()
         fetchData();
-   
+
 
     }
 
@@ -57,15 +57,15 @@ const Login = ({setIsLoggedIn, setUser}) => {
                     <p className="text-2xl font-semibold">Contact Book</p>
                 </div>
 
-                <form className="flex flex-col items-center"  style={{ marginTop: "50%", marginBottom: "50%" }}>
-                        <label className="mx-4 mb-1">Username</label>
-                        <input className="w-1/2 mx-4 mb-4 p-1 rounded text-black bg-gray-200"  value={username} onChange={e => setUsername(e.target.value)}></input>
+                <form className="flex flex-col items-center" style={{ marginTop: "50%", marginBottom: "50%" }}>
+                    <label className="mx-4 mb-1">Username</label>
+                    <input className="w-1/2 mx-4 mb-4 p-1 rounded text-black bg-gray-200" value={username} onChange={e => setUsername(e.target.value)}></input>
 
-                        <label className="mx-4 mb-1">Password</label>
-                        <input className="w-1/2 mx-4 p-1 rounded text-black bg-gray-200" value={password} onChange={e => setPassword(e.target.value)} ></input>
+                    <label className="mx-4 mb-1">Password</label>
+                    <input className="w-1/2 mx-4 p-1 rounded text-black bg-gray-200" value={password} onChange={e => setPassword(e.target.value)} ></input>
 
-                        <p className='text-xs text-yellow-600 mx-4 mt-4'>{res.error}</p>
-                        <button className=" text-black rounded p-1 mt-8 bg-gray-200" onClick={handleLogin}>Login</button>
+                    <p className='text-xs text-yellow-600 mx-4 mt-4'>{res.error}</p>
+                    <button className=" text-black rounded p-1 mt-8 bg-gray-200" onClick={handleLogin}>Login</button>
 
                 </form>
 

@@ -2,9 +2,9 @@ import Api from '../ApiConfig'
 import { useState } from 'react';
 
 
-const Settings = ({ handleBack, user,isToggled, handleNumberToggle, isThemeToggled, handleThemeToggle }) => {
+const Settings = ({ handleBack, user, isToggled, handleNumberToggle, isThemeToggled, handleThemeToggle }) => {
 
-    
+
 
     const [isClosing, setIsClosing] = useState(false);
 
@@ -13,12 +13,12 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle, isThemeToggl
         setTimeout(handleBack, 100);
     }
 
-    
+
     const handleLogout = () => {
-        
+
 
         try {
-            const response =  fetch(`${Api}/Logout/`);
+            const response = fetch(`${Api}/Logout/`);
             console.log(response);
             localStorage.removeItem('isLoggedIn');
             localStorage.clear();
@@ -70,7 +70,7 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle, isThemeToggl
 
     return (
 
-        <div className={`container ${isThemeToggled ? "bg-black text-white" :"bg-white text-black"}   xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen ${isClosing ? "slide-out-from-left" : "slide-in-from-right"}`}>
+        <div className={`container ${isThemeToggled ? "bg-black text-white" : "bg-white text-black"}   xs:w-1/2 sm:w-2/3 lg:w-1/3 h-screen ${isClosing ? "slide-out-from-left" : "slide-in-from-right"}`}>
 
             <div className="flex items-center p-6 justify-center border-b border-gray-300 border-opacity-20 font-bold text-xl">
                 <i className="bi bi-chevron-left pr-3" onClick={handleClose}></i>
@@ -85,7 +85,7 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle, isThemeToggl
                     <input type="checkbox" name="toggle" id="toggle" checked={isToggled} onChange={handleNumberToggle} onClick={handleApi} className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-gray-500 appearance-none cursor-pointer" />
                     <label htmlFor="toggle" className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-500 cursor-pointer"></label>
                 </div>
-                
+
             </div>
 
             <div className='mt-8 flex items-center px-6'>
@@ -95,7 +95,7 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle, isThemeToggl
                     <input type="checkbox" name="Themetoggle" id="Themetoggle" checked={isThemeToggled} onChange={handleThemeToggle} onClick={handleThemeApi} className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-gray-500 appearance-none cursor-pointer" />
                     <label htmlFor="Themetoggle" className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-500 cursor-pointer"></label>
                 </div>
-                
+
             </div>
 
 
@@ -108,8 +108,8 @@ const Settings = ({ handleBack, user,isToggled, handleNumberToggle, isThemeToggl
             <div className='mt-96 flex items-center px-6'>
                 <p className='text-sm' onClick={handleLogout}>Logout</p>
                 <span className='grow'></span>
-               
-                
+
+
             </div>
 
         </div>
