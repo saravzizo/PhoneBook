@@ -18,7 +18,7 @@ const Favourites = ({ user, isThemeToggled, setTotalFav, searchTerm }) => {
             }
         };
         fetchData();
-    }, [user]);
+    }, [user,setTotalFav]);
 
 
     let filteredFav = res.filter(contact =>

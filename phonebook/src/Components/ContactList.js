@@ -6,17 +6,19 @@ const ContactList = ({ isThemeToggled, isEdit, user, handleCheck, checkedContact
 
     const [favIds, setFavIds] = useState([]);
 
+
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 const response = await fetch(`${Api}/user/${user}/favourites`);
                 const data = await response.json();
-                let ids = []
+                const ids = []
 
-                data.map((m, i) => {
-                    ids[i] = m.id
+                data.forEach((element, index) => {
+                    ids[index] = element.id
                 });
-                setFavIds(ids)
+                setFavIds(ids);
 
             } catch (error) {
                 console.error("Error", error);
@@ -26,33 +28,53 @@ const ContactList = ({ isThemeToggled, isEdit, user, handleCheck, checkedContact
     }, [user, setFavIds]);
 
 
-    favIds.map((index) => {
-        document.getElementById(index).classList.remove("bi-star")
-        document.getElementById(index).classList.add("bi-star-fill");
-    });
-
-
     const handleStar = async (id) => {
-        try {
-            const response = await fetch(`${Api}/user/${user}/favourites/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    "fav_contact": id,
-                }),
-            });
-            if (response.status === 200) {
-                document.getElementById(id).classList.remove("bi-star")
-                document.getElementById(id).classList.add("bi-star-fill");
+
+        if (favIds.includes(id)) {
+            try {
+                const response = await fetch(`${Api}/user/${user}/favourites/`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'DELETE',
+                    body: JSON.stringify({
+                        "delete_fav_contact": id,
+                    }),
+                });
+                if (response.status === 200) {
+                    favIds.pop(id)
+                    document.getElementById(id).classList.remove("bi-star-fill")
+                    document.getElementById(id).classList.add("bi-star");
+                }
+
+            } catch (error) {
+                console.error("Error", error);
+            }
+        }
+        else {
+            try {
+                const response = await fetch(`${Api}/user/${user}/favourites/`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        "fav_contact": id,
+                    }),
+                });
+                if (response.status === 200) {
+                    favIds.push(id)
+                    document.getElementById(id).classList.remove("bi-star")
+                    document.getElementById(id).classList.add("bi-star-fill");
+                }
+
+            } catch (error) {
+                console.error("Error", error);
             }
 
-        } catch (error) {
-            console.error("Error", error);
         }
-    }
 
+    }
 
     return (
         <div >
@@ -77,7 +99,7 @@ const ContactList = ({ isThemeToggled, isEdit, user, handleCheck, checkedContact
 
                                 </div>
                                 <div className="flex-grow"></div>
-                                <i className="bi bi-star flex items-center justify-center" id={index} onClick={handleStar}></i>
+                                <i className={`${favIds.includes(m.id) ? "bi bi-star-fill" : "bi bi-star"} flex items-center justify-center`} id={index} onClick={handleStar}></i>
                             </div>
 
                             :
@@ -88,11 +110,9 @@ const ContactList = ({ isThemeToggled, isEdit, user, handleCheck, checkedContact
 
                                 </div>
                                 <div className="flex-grow"></div>
-                                <i className="bi bi-star flex items-center justify-center" id={m.id} onClick={() => handleStar(m.id)} ></i>
+                                <i className={`${favIds.includes(m.id) ? "bi bi-star-fill" : "bi bi-star"} flex items-center justify-center`} id={m.id} onClick={() => handleStar(m.id)} ></i>
                             </div>
-                    )
-                    )
-                }
+                    ))}
 
             </div>
         </div>

@@ -18,7 +18,7 @@ from .serializers import (
     DeletedSerializer,
     FeatureSerializer,
     NumberFeatureFlagSerializer,
-    DarkModeFeatureFlagSerializer
+    DarkModeFeatureFlagSerializer,
 )
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
@@ -99,7 +99,7 @@ class contacts(APIView):
 
             return Response({"error": str(e)}, status=200)
 
-    def post(self, request,user):
+    def post(self, request, user):
 
         try:
             data = request.data
@@ -111,7 +111,7 @@ class contacts(APIView):
                     contact_name = item.get("contact_name")
                     contact_number = item.get("contact_number")
                     country_code = item.get("country_code")
-                    
+
                     Contact.objects.create(
                         user=user_id,
                         contact_name=contact_name,
@@ -122,35 +122,34 @@ class contacts(APIView):
                 contact_name = data.get("contact_name")
                 contact_number = data.get("contact_number")
                 country_code = data.get("country_code")
-                
-                if(contact_name == None or contact_name == ""):
+
+                if contact_name == None or contact_name == "":
                     return Response(
                         {"Name_Error": "Contact name should not be empty"}, status=400
                     )
-                elif (contact_number == None or contact_number == ""):
+                elif contact_number == None or contact_number == "":
                     return Response(
-                        {"Number_Error": "Contact number should not be empty"}, status=400
+                        {"Number_Error": "Contact number should not be empty"},
+                        status=400,
                     )
-                elif(country_code == None or country_code == ""):
+                elif country_code == None or country_code == "":
                     return Response(
                         {"Code_Error": "Country code should not be empty"}, status=400
                     )
-                 
-                 
-                    
+
                 if Contact.objects.filter(contact_number=contact_number).exists():
                     return Response(
                         {"Number_Error": "Contact number already exists"}, status=400
                     )
-                if(len(contact_number) != 10):
+                if len(contact_number) != 10:
                     return Response(
                         {"Number_Error": "Number should contain 10 digits"}, status=400
                     )
-                if(len(country_code) > 3):
+                if len(country_code) > 3:
                     return Response(
                         {"Code_Error": "Code shouldn't more than 3 digits"}, status=400
                     )
-                    
+
                 Contact.objects.create(
                     user=user_id,
                     contact_name=contact_name,
@@ -191,13 +190,12 @@ class contacts(APIView):
                     responses.append(
                         {"error": f"Failed to delete contact {contact_id}: {str(e)}"}
                     )
-                    flag=400
+                    flag = 400
 
             return Response(
                 {
                     "message": responses,
                 },
-                
                 status=flag,
             )
 
@@ -254,26 +252,47 @@ class Favourites_view(APIView):
         serializer = contactSerializer(list, many=True)
         return Response(serializer.data)
 
-    
     def post(self, request, user):
         try:
             user_pk = get_user_model().objects.get(username=user)
-            
             fav_contact = request.data.get("fav_contact")
-            
             contact = get_object_or_404(Contact, id=fav_contact)
-            
+
             fav = Fav_contacts.objects.filter(user=user_pk, fav_Contacts=contact)
             if fav:
-                return Response({"message" : f"Contact {fav_contact} already added to favourites"})
+                return Response(
+                    {"message": f"Contact {fav_contact} already added to favourites"},
+                    status=200,
+                )
             else:
                 Fav_contacts.objects.create(user=user_pk, fav_Contacts=contact)
-                return Response({"message" : f"Contact {fav_contact} added to favourites successfully"})
-            
+                return Response(
+                    {
+                        "message": f"Contact {fav_contact} added to favourites successfully"
+                    },
+                    status=200,
+                )
+
         except Exception as e:
             return Response({"error": str(e)}, status=400)
-            
-        
+
+    def delete(self, request, user):
+        try:
+            user_pk = get_user_model().objects.get(username=user)
+            fav_contact = request.data.get("delete_fav_contact")
+            contact = get_object_or_404(Contact, id=fav_contact)
+
+            fav = Fav_contacts.objects.get(user=user_pk, fav_Contacts=contact)
+            fav.delete()
+
+            return Response(
+                {"message": f"Contact {fav_contact} removed from favourites"},
+                status=200,
+            )
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=400)
+
 
 class Deleted_view(APIView):
     def get(self, request, user):
@@ -309,12 +328,12 @@ class Number_feature_view(APIView):
         try:
             user_id = get_user_model().objects.get(username=user)
             feature_flag = get_object_or_404(Feature_Flag, user=user_id)
-            
-            if 'Number_Feature_Flag' in request.data:
+
+            if "Number_Feature_Flag" in request.data:
                 serializer = NumberFeatureFlagSerializer(
                     feature_flag, data=request.data, partial=True
                 )
-            elif 'Dark_mode_feature' in request.data:
+            elif "Dark_mode_feature" in request.data:
                 serializer = DarkModeFeatureFlagSerializer(
                     feature_flag, data=request.data, partial=True
                 )
@@ -328,4 +347,3 @@ class Number_feature_view(APIView):
                 return Response(serializer.errors, status=400)
         except Exception as e:
             return Response({"error": str(e)}, status=400)
-

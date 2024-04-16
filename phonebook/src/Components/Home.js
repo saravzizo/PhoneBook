@@ -181,7 +181,7 @@ const Home = ({ user, setIsThemeToggled, isThemeToggled }) => {
                         {favClicked ? <Favourites isThemeToggled={isThemeToggled} user={user} setTotalFav={setTotalFav} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
                             : binClicked ? <Deleted isThemeToggled={isThemeToggled} user={user} setTotalDel={setTotalDel} searchTerm={searchTerm} />
-                                : <ContactList isThemeToggled={isThemeToggled} isEdit={isEdit} user = {user} handleCheck={handleCheck} checkedContacts={checkedContacts} isToggled={isToggled} filteredRes={filteredRes} />
+                                : <ContactList isThemeToggled={isThemeToggled} isEdit={isEdit} user={user} handleCheck={handleCheck} checkedContacts={checkedContacts} isToggled={isToggled} filteredRes={filteredRes} />
                         }
                         <FootBar isThemeToggled={isThemeToggled} user={user} checkedContacts={checkedContacts} isEdit={isEdit} handleFootBarClick={handleFootBarClick} />
                     </div>
