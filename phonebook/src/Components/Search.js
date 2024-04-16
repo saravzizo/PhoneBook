@@ -21,7 +21,9 @@ const Search = ({ isThemeToggled, res, favClicked, binClicked, totalFav, totalDe
 
 
     return (
-        <div className={`mx-6 flex items-center rounded-lg py-1 ${isThemeToggled ? "text-black bg-gray-500" : "text-black bg-gray-200"}`}>
+        <div className={`mx-6 flex items-center rounded-lg py-1`} 
+        style={{ backgroundColor: isThemeToggled ? '#303030' : '#d8d8d8', color: isThemeToggled? "white": "black"}}
+        >
             <i className="bi bi-search px-2"></i>
 
             <input className="border-0 w-full font-noraml"
