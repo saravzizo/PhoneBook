@@ -2,6 +2,7 @@ env/
 Design/
 
 # dependencies
+/node_modules
 phonebook/node_modules
 
 # production
