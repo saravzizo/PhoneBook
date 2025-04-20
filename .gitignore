@@ -2,6 +2,7 @@ env/
 Design/
 
 # dependencies
+MobileApp/mobile-app/node_modules
 /node_modules
 phonebook/node_modules
 
@@ -20,3 +21,7 @@ book/*.pot
 book/*.pyc 
 book/media
 book/Login/migrations/__pycache__
+
+
+# expo 
+MobileApp/mobile-app/expo-env.d.ts
